@@ -1,0 +1,18 @@
+{
+  "students": [
+    {
+      "id": "894a",
+      "reg": "710722104057",
+      "name": "thekigofthejungle",
+      "email": "22cs057@xavier.ac.in",
+      "contact": "9812408741"
+    },
+    {
+      "id": "895a",
+      "reg": "710722104054",
+      "name": "logesh",
+      "email": "22cs054@xavier.ac.in",
+      "contact": "9812408742"
+    }
+  ]
+}
