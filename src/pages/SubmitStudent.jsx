@@ -6,6 +6,7 @@ import Nerd from "../assets/NerdBoy.png";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Logo from "../components/Logo.jsx";
 
 const SubmitStudent = () => {
     const [output, setOutput] = useState({ reg: "", name: "", email: "", contact: "" });
