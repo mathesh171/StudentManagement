@@ -147,10 +147,12 @@ const SubmitStudent = () => {
     return (
         <div className={styles.element}>
             <ToastContainer {...toastConfig} />
-            <img className={styles.img} src={Nerd} width={"120px"} alt={"user-logo"} />
             <div className={styles.container}>
-                <h1>Submit Student</h1>
-                <br />
+                <div className={styles.leftSection}>
+                    <img className={styles.img} src={Nerd} width={"120px"} alt={"user-logo"} />
+                    <h1>Submit Student</h1>
+                </div>
+                <div className={styles.rightSection}>
                 <form onSubmit={handleSubmit}>
                     <input onChange={handleChange} value={student.reg} id="reg" name="reg" placeholder="Enter reg Number" />
                     <input onChange={handleChange} value={student.name} id="name" name="name" placeholder="Enter Name" />
@@ -180,6 +182,7 @@ const SubmitStudent = () => {
                     email={output.email}
                     contact={output.contact}
                 />
+                </div>
             </div>
         </div>
     );
