@@ -1,55 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from '../styles/Login.module.css';
+import Logo from '../components/Logo';
 
 const Login = () => {
   const [admin, setAdmin] = useState({ username: "", password: "" });
   const [errMessage, setErrMessage] = useState("");
 
-  // New focus state
-  const [focusField, setFocusField] = useState("");
-
   const navigate = useNavigate();
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setAdmin(prevState => ({
       ...prevState,
       [name]: value
     }));
-  }
+  };
 
-  function handleLogin(event) {
+  const handleLogin = (event) => {
     event.preventDefault();
     if (admin.username !== "Professor X") {
       setErrMessage("Username is not correct");
-      setFocusField("username"); // set focus flag
       return;
     } else if (admin.password !== "charlesxavier") {
       setErrMessage("Password is not correct");
-      setFocusField("password"); // set focus flag
       return;
     }
+    localStorage.setItem("isLoggedIn", "true");
     navigate("/home");
-  }
-
-  useEffect(() => {
-    if (focusField) {
-      const input = document.getElementById(focusField);
-      input?.focus();
-      setFocusField(""); // reset after focusing
-    }
-  }, [focusField]);
+  };
 
   return (
     <div className={styles.centeredElement}>
-      <img
-        className={styles.loginImg}
-        src={"./images/login-logo.png"}
-        alt="login-logo"
-      />
+      <Logo/>
       <div className={styles.loginContainer}>
-        <h1>Admin Login</h1>
+        <div className={styles.title}>
+          <img
+            className={styles.loginImg}
+            src={"./images/login-logo.png"}
+            alt="login-logo"
+          />
+          <h1>Admin Login</h1>
+        </div>
         <br />
         <form onSubmit={handleLogin} className={styles.loginForm}>
           <input

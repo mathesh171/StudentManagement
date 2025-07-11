@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+cse2022_students_with_scores_attendance.json
+students_cse2022_ece2023.json
 
 # Editor directories and files
 .vscode/*
