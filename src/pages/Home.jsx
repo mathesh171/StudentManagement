@@ -34,6 +34,8 @@ const Home = () => {
                 <Link className={styles.navLink} to="/get">Get Student Details</Link>
                 <Link className={styles.navLink} to="/update">Update Student Details</Link>
                 <Link className={styles.navLink} to="/delete">Delete Student</Link>
+                <Link className={styles.navLink} to="/score">Score Analysis</Link>
+                <Link className={styles.navLink} to="/attendance">Attendace Analysis</Link>
               </div>
             </div>
           </div>

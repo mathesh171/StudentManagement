@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Logo from "../components/Logo.jsx";
 
 const SubmitStudent = () => {
-    const [output, setOutput] = useState({ reg: "", name: "", email: "", contact: "" });
+    const [output, setOutput] = useState({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
     const [student, setStudent] = useState({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
 
     const departments = ["cse", "ece", "eee", "mech", "civil", "bme", "aids", "it", "csbs", "areospace", "cybersecurity", "mechatronics"];
@@ -100,32 +100,45 @@ const SubmitStudent = () => {
         } else if (!/^\d{10}$/.test(student.contact)) {
             toast.error("Student contact is empty or invalid", toastConfig);
             return;
+        } else if (!student.dept) {
+            toast.error("Please select a department", toastConfig);
+            return;
+        } else if (!student.batch) {
+            toast.error("Please select a batch", toastConfig);
+            return;
         }
 
-        setOutput({ reg: student.reg, name: student.name, email: student.email, contact: student.contact });
+        
+        setOutput({ 
+            reg: student.reg, 
+            name: student.name, 
+            email: student.email, 
+            contact: student.contact,
+            dept: student.dept,
+            batch: student.batch
+        });
+        
         setStudent({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!output.reg || !output.name || !output.email || !output.contact) {
+        if (!output.reg || !output.name || !output.email || !output.contact || !output.dept || !output.batch) {
             toast.error("Inputs didn't checked out", toastConfig);
             return;
         }
 
         const fullData = {
             ...output,
-            dept: student.dept,
-            batch: student.batch,
-            scores: generateScores(student.dept),
-            attendance: generateAttendance(student.batch)
+            scores: generateScores(output.dept),
+            attendance: generateAttendance(output.batch)
         };
 
         axios.post("http://localhost:3000/students", fullData)
             .then(() => {
                 toast.success("Student successfully submitted to the database", toastConfig);
-                setOutput({ reg: "", name: "", email: "", contact: "" });
+                setOutput({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
             })
             .catch((err) => {
                 const message = err.response?.data?.message || `Error: ${err.message}`;
@@ -148,6 +161,7 @@ const SubmitStudent = () => {
     return (
         <div className={styles.element}>
             <ToastContainer {...toastConfig} />
+            <Logo/>
             <div className={styles.container}>
                 <div className={styles.leftSection}>
                     <img className={styles.img} src={Nerd} width={"120px"} alt={"user-logo"} />
