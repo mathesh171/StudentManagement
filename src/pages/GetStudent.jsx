@@ -6,6 +6,8 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import styles from "../styles/GetStudent.module.css";
+import Logo from "../components/Logo";
+import LogoutButton from "../components/LogoutButton";
 
 const GetStudent = () => {
     const [output, setOutput] = useState({ reg: "", name: "", email: "", contact: "" });
@@ -66,7 +68,11 @@ const GetStudent = () => {
     };
 
     return (
-        <div className={styles.element}>
+        <div className={styles.centeredElement}>
+            <div className={styles.topBar}>
+                <Logo />
+                <LogoutButton />
+            </div>
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -80,32 +86,33 @@ const GetStudent = () => {
                 theme="dark"
                 transition={Bounce}
             />
-            <img className={styles.img} src={Nerd} width={"100px"} alt={"student-logo"} />
-            <div className={styles.container}>
-                <h1>Get Student Details</h1>
-                <br />
-                <form onSubmit={handleSubmit}>
-                    <input
-                        onChange={handleChange}
-                        value={reg}
-                        id="reg"
-                        name="reg"
-                        placeholder="Enter reg Number"
-                        className={focusField === "reg" ? styles.inputError : styles.input}
-                    />
-                    <h5>&nbsp;</h5>
-                    <br />
-                    <button type={"submit"} className={styles.button}>Get Student Details</button>
-                    <Link className={styles.link} to='/home'>Back</Link>
-                </form>
-                <OutputContainer
-                    reg={output.reg}
-                    name={output.name}
-                    email={output.email}
-                    contact={output.contact}
-                />
-                <br />
-                <h4>&nbsp;</h4>
+            <div className={styles.studentContainer}>
+                <div className={styles.splitContent}>
+                    <div className={styles.leftSection}>
+                        <img className={styles.dashboardImage} src={Nerd} alt="student-logo" />
+                        <h1>Get Student Details</h1>
+                    </div>
+                    <div className={styles.rightSection}>
+                        <form onSubmit={handleSubmit} className={styles.form}>
+                            <input
+                                onChange={handleChange}
+                                value={reg}
+                                id="reg"
+                                name="reg"
+                                placeholder="Enter reg Number"
+                                className={focusField === "reg" ? styles.inputError : styles.input}
+                            />
+                            <button type="submit" className={styles.button}>Get Student Details</button>
+                            <Link className={styles.link} to='/home'>Back</Link>
+                        </form>
+                        <OutputContainer
+                            reg={output.reg}
+                            name={output.name}
+                            email={output.email}
+                            contact={output.contact}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );

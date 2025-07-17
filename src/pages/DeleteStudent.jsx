@@ -5,6 +5,8 @@ import styles from "../styles/DeleteStudent.module.css";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Logo from "../components/Logo";
+import LogoutButton from "../components/LogoutButton";
 
 function DeleteStudent() {
     const [reg, setreg] = useState("");
@@ -58,6 +60,10 @@ function DeleteStudent() {
 
     return (
         <div className={styles.element}>
+             <div className={styles.topBar}>
+                <Logo />
+                <LogoutButton />
+            </div>
             <ToastContainer />
             <img className={styles.img} src={Nerd} width={"120px"} alt={"user-logo"} />
             <div className={styles.container}>

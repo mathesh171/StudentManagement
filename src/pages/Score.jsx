@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, AreaChart, Area, ResponsiveContainer } from 'recharts';
-import Logo from '../components/Logo';
-import LogoutButton from '../components/LogoutButton';
 import styles from '../styles/Score.module.css';
 import FilterButton from '../components/FilterButton';
+import Logo from '../components/Logo';
+import LogoutButton from '../components/LogoutButton';
 
 const Score = () => {
   const [data, setData] = useState({ students: [] });

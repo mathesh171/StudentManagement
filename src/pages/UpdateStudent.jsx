@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Nerd from "../assets/NerdBoy.png";
 import styles from "../styles/UpdateStudent.module.css";
 import axios from "axios";
+import Logo from "../components/Logo";
+import LogoutButton from "../components/LogoutButton";
 
 const UpdateStudent = () => {
     const [output, setOutput] = useState({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
@@ -119,7 +121,11 @@ const UpdateStudent = () => {
     };
 
     return (
-        <div className={styles.element}>
+        <div className={styles.element}> 
+            <div className={styles.topBar}>
+                <Logo />
+                <LogoutButton />
+            </div>
             <ToastContainer
                 position="top-right"
                 autoClose={5000}

@@ -6,7 +6,8 @@ import Nerd from "../assets/NerdBoy.png";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from "../components/Logo.jsx";
+import Logo from "../components/Logo";
+import LogoutButton from "../components/LogoutButton";
 
 const SubmitStudent = () => {
     const [output, setOutput] = useState({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
@@ -177,7 +178,10 @@ const SubmitStudent = () => {
     return (
         <div className={styles.element}>
             <ToastContainer {...toastConfig} />
-            <Logo/>
+            <div className={styles.topBar}>
+                <Logo />
+                <LogoutButton />
+            </div>
             <div className={styles.container}>
                 <div className={styles.leftSection}>
                     <img className={styles.img} src={Nerd} alt={"user-logo"} />
