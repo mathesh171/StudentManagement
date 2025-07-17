@@ -2,20 +2,15 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
 import Logo from "../components/Logo";
-
+import LogoutButton from "../components/LogoutButton";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    navigate('/');
-  };
 
   return (
     <div className={styles.centeredElement}>
       <div className={styles.topBar}>
         <Logo />
-        <button onClick={handleLogout} className={styles.logout}>Logout</button>
+        <LogoutButton />
       </div>
       <div className={styles.scrollContent}>
         <div className={styles.studentContainer}>
