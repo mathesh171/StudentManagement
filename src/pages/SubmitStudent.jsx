@@ -129,20 +129,36 @@ const SubmitStudent = () => {
             return;
         }
 
-        const fullData = {
-            ...output,
-            scores: generateScores(output.dept),
-            attendance: generateAttendance(output.batch)
-        };
+        axios.get("http://localhost:3000/students")
+            .then(response => {
+                const existingStudents = response.data || [];
+                const regExists = existingStudents.some(student => student.reg === output.reg);
+                
+                if (regExists) {
+                    toast.error("Registration number already exists in the database", toastConfig);
+                    setOutput({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
+                    return Promise.reject("Duplicate registration");
+                }
 
-        axios.post("http://localhost:3000/students", fullData)
-            .then(() => {
-                toast.success("Student successfully submitted to the database", toastConfig);
-                setOutput({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
+                const fullData = {
+                    ...output,
+                    scores: generateScores(output.dept),
+                    attendance: generateAttendance(output.batch)
+                };
+
+                return axios.post("http://localhost:3000/students", fullData);
+            })
+            .then((response) => {
+                if (response) {
+                    toast.success("Student successfully submitted to the database", toastConfig);
+                    setOutput({ reg: "", name: "", email: "", contact: "", dept: "", batch: "" });
+                }
             })
             .catch((err) => {
-                const message = err.response?.data?.message || `Error: ${err.message}`;
-                toast.error(message, toastConfig);
+                if (err !== "Duplicate registration") {
+                    const message = err.response?.data?.message || `Error: ${err.message}`;
+                    toast.error(message, toastConfig);
+                }
             });
     };
 
@@ -164,39 +180,42 @@ const SubmitStudent = () => {
             <Logo/>
             <div className={styles.container}>
                 <div className={styles.leftSection}>
-                    <img className={styles.img} src={Nerd} width={"120px"} alt={"user-logo"} />
+                    <img className={styles.img} src={Nerd} alt={"user-logo"} />
                     <h1>Submit Student</h1>
                 </div>
                 <div className={styles.rightSection}>
-                <form onSubmit={handleSubmit}>
-                    <input onChange={handleChange} value={student.reg} id="reg" name="reg" placeholder="Enter reg Number" />
-                    <input onChange={handleChange} value={student.name} id="name" name="name" placeholder="Enter Name" />
-                    <input onChange={handleChange} value={student.email} id="email" name="email" placeholder="Enter email" />
-                    <input onChange={handleChange} value={student.contact} id="contact" name="contact" placeholder="Enter Contact" />
-                    <select name="dept" value={student.dept} onChange={handleChange}>
-                        <option value="">Select Department</option>
-                        {departments.map((d) => (
-                            <option key={d} value={d}>{d.toUpperCase()}</option>
-                        ))}
-                    </select>
-                    <select name="batch" value={student.batch} onChange={handleChange}>
-                        <option value="">Select Batch</option>
-                        {batches.map((year) => (
-                            <option key={year} value={year}>{year}</option>
-                        ))}
-                    </select>
-                    <br />
-                    <button onClick={handleCheckOut} type={"button"}>Check Out</button>
-                    <button type={"submit"}>Submit Student</button>
-                    <Link className={styles.back} to='/home'>Back</Link>
-                </form>
-                <br />
-                <OutputContainer
-                    reg={output.reg}
-                    name={output.name}
-                    email={output.email}
-                    contact={output.contact}
-                />
+                    <form onSubmit={handleSubmit} className={styles.form}>
+                        <div className={styles.inputGroup}>
+                            <input onChange={handleChange} value={student.reg} id="reg" name="reg" placeholder="Enter reg Number" className={styles.input} />
+                            <input onChange={handleChange} value={student.name} id="name" name="name" placeholder="Enter Name" className={styles.input} />
+                            <input onChange={handleChange} value={student.email} id="email" name="email" placeholder="Enter email" className={styles.input} />
+                            <input onChange={handleChange} value={student.contact} id="contact" name="contact" placeholder="Enter Contact" className={styles.input} />
+                            <select name="dept" value={student.dept} onChange={handleChange} className={styles.select}>
+                                <option value="">Select Department</option>
+                                {departments.map((d) => (
+                                    <option key={d} value={d}>{d.toUpperCase()}</option>
+                                ))}
+                            </select>
+                            <select name="batch" value={student.batch} onChange={handleChange} className={styles.select}>
+                                <option value="">Select Batch</option>
+                                {batches.map((year) => (
+                                    <option key={year} value={year}>{year}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className={styles.buttonGroup}>
+                            <button onClick={handleCheckOut} type={"button"} className={styles.button}>Check Out</button>
+                            <button type={"submit"} className={styles.button}>Submit Student</button>
+                            <Link className={styles.back} to='/home'>Back</Link>
+                        </div>
+                    </form>
+                    <OutputContainer
+                        reg={output.reg}
+                        name={output.name}
+                        email={output.email}
+                        contact={output.contact}
+                        className={styles.outputContainer}
+                    />
                 </div>
             </div>
         </div>
