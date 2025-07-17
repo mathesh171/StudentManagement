@@ -11,7 +11,8 @@ export default function Logo() {
     }
   }
   return (
-    <div className={`${styles.container} ${location.pathname === '/home' ? styles.noPointer : ''}`} 
+    <div className={`${styles.container} ${location.pathname === '/home' 
+      || location.pathname === '/'? styles.noPointer : ''}`} 
           onClick={home}>
       <img src={Graduation} alt="Logo" className={styles.image}/>
       <h1 className={styles.text}>Xavier's School</h1>
