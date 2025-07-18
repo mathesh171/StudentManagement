@@ -65,24 +65,29 @@ function DeleteStudent() {
                 <LogoutButton />
             </div>
             <ToastContainer />
-            <img className={styles.img} src={Nerd} width={"120px"} alt={"user-logo"} />
-            <div className={styles.container}>
-                <h1>Delete Student</h1>
-                <br />
-                <form onSubmit={handleSubmit}>
-                    <input
-                        onChange={handleChange}
-                        value={reg}
-                        id="reg"
-                        name="reg"
-                        placeholder="Enter reg Number"
-                        className={styles.input}
-                    />
-                    <h5>&nbsp;</h5>
-                    <br />
-                    <button type={"submit"} className={styles.button}>Delete Student</button>
-                    <Link className={styles.back} to='/home'>Back</Link>
-                </form>
+             <div className={styles.container}>
+                <div className={styles.leftSection}>
+                    <img className={styles.img} src={Nerd} width={"120px"} alt={"user-logo"} />
+                    <div className={styles.text}>
+                        <h1>Delete Student</h1>
+                    </div>
+                </div>
+                <div className={styles.rightSection}>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            onChange={handleChange}
+                            value={reg}
+                            id="reg"
+                            name="reg"
+                            placeholder="Enter reg Number"
+                            className={styles.input}
+                        />
+                        <h5>&nbsp;</h5>
+                        <br />
+                        <button type={"submit"} className={styles.button}>Delete Student</button>
+                        <Link className={styles.back} to='/home'>Back</Link>
+                    </form>
+                </div>
             </div>
         </div>
     );
