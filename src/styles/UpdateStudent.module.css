@@ -1,9 +1,9 @@
 .element {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  background: linear-gradient(135deg, #f0fdf4, #e0f7fa);
   align-items: center;
   justify-content: flex-start;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f0fdf4, #e0f7fa);
   padding: 30px 20px;
   margin: 0;
   position: fixed;
